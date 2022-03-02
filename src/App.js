@@ -1,18 +1,35 @@
 import React from "react";
 import { Die } from "./Die";
-import { v4 as uuidv4 } from "uuid";
+import { nanoid } from "nanoid";
+
+const allNewDice = () =>
+  Array(10)
+    .fill({})
+    .map(() => ({
+      value: Math.ceil(Math.random() * 6),
+      isHeld: true,
+      id: nanoid(),
+    }));
+
+// [...Array(10)].map(() => Math.ceil(Math.random() * 6));
 
 export const App = () => {
   const [dice, setDice] = React.useState(allNewDice());
 
-  function allNewDice() {
-    const newDice = [];
-    for (let i = 0; i < 10; i++) {
-      newDice.push(Math.ceil(Math.random() * 6));
-    }
-    console.log(newDice);
-    return newDice;
-  }
+  const toggleDice = (dieId) => {
+    console.log(dieId);
+  };
+
+  const diceElements = dice.map((die) => (
+    <Die
+      key={die.id}
+      value={die.value}
+      isHeld={die.isHeld}
+      handleOnClick={() => toggleDice(die.id)}
+    />
+  ));
+
+  const rollDice = () => setDice(() => allNewDice());
 
   return (
     <main>
@@ -22,12 +39,10 @@ export const App = () => {
           Roll until all dice are the same. Click each die to freeze it at its
           current value between rolls.
         </p>
-        <div className="content--grid">
-          {dice.map((dieValue) => (
-            <Die key={uuidv4()} value={dieValue} />
-          ))}
-        </div>
-        <button className="button--roll">Roll</button>
+        <div className="content--grid">{diceElements}</div>
+        <button onClick={rollDice} className="button--roll">
+          Roll
+        </button>
       </div>
     </main>
   );

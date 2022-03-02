@@ -22,7 +22,7 @@ main {
   position: absolute;
   width: 24rem;
   height: 24rem;
-  background: #f5f5f5;
+  background: hsl(0, 3%, 93%);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -60,12 +60,19 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #59e391;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   height: 2.5rem;
   width: 2.5rem;
   border-radius: 4px;
+}
+
+.die--held {
+  background: hsl(247, 100%, 80%);
+}
+
+.die--not--held {
+  background: hsl(0, 0%, 100%);
 }
 
 .button--roll {
@@ -74,10 +81,18 @@ main {
   font-size: 24px;
   line-height: 19px;
   color: #ffffff;
-  background: #5035ff;
-  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.45);
+  background: hsl(248, 100%, 60%);
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.5);
   border-radius: 4px;
   height: 2.5em;
   width: 7em;
   border: none;
+}
+.button--roll:hover {
+  background: hsl(247, 90%, 60%);
+}
+.button--roll:active {
+  background: hsl(247, 90%, 60%);
+  transform: translateY(0.1rem);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.6);
 }
