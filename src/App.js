@@ -7,29 +7,45 @@ const allNewDice = () =>
     .fill({})
     .map(() => ({
       value: Math.ceil(Math.random() * 6),
-      isHeld: true,
+      isHeld: false,
       id: nanoid(),
     }));
-
 // [...Array(10)].map(() => Math.ceil(Math.random() * 6));
 
 export const App = () => {
   const [dice, setDice] = React.useState(allNewDice());
 
   const toggleDice = (dieId) => {
-    console.log(dieId);
+    setDice((oldDice) =>
+      oldDice.map((oldDie) => {
+        return oldDie.id === dieId
+          ? { ...oldDie, isHeld: !oldDie.isHeld }
+          : oldDie;
+      })
+    );
   };
 
-  const diceElements = dice.map((die) => (
-    <Die
-      key={die.id}
-      value={die.value}
-      isHeld={die.isHeld}
-      handleOnClick={() => toggleDice(die.id)}
-    />
-  ));
+  const diceElements =
+    dice &&
+    dice.map((die) => (
+      <Die
+        key={die.id}
+        value={die.value}
+        isHeld={die.isHeld}
+        holdDice={() => toggleDice(die.id)}
+      />
+    ));
 
-  const rollDice = () => setDice(() => allNewDice());
+  const rollNewDie = (die) => ({ ...die, value: Math.ceil(Math.random() * 6) });
+
+  const rollDice = () => {
+    setDice((oldDice) =>
+      oldDice.map((oldDie) => {
+        return oldDie.isHeld ? oldDie : rollNewDie(oldDie);
+      })
+    );
+  };
+  // if dice.isHeld is true, don't roll it
 
   return (
     <main>

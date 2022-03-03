@@ -1,16 +1,16 @@
 import React from "react";
 
-export const Die = ({ value, isHeld, handleOnClick }) => {
+export const Die = ({ value, isHeld, holdDice }) => {
   return (
-    <h3>
+    <h2>
       <div
-        onClick={handleOnClick}
+        onClick={holdDice}
         className={
           isHeld ? "content--die die--held" : "content--die die--not--held"
         }
       >
         {value}
       </div>
-    </h3>
+    </h2>
   );
 };

@@ -8,11 +8,12 @@ body {
 main {
   width: 28rem;
   height: 28rem;
-  background: #0b2434;
+  background: hsl(278, 38%, 43%);
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  border-radius: 2rem;
 }
 
 .content {
@@ -65,6 +66,7 @@ main {
   height: 2.5rem;
   width: 2.5rem;
   border-radius: 4px;
+  user-select: none;
 }
 
 .die--held {
