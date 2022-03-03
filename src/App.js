@@ -1,6 +1,7 @@
 import React from "react";
 import { Die } from "./Die";
 import { nanoid } from "nanoid";
+import Confetti from "react-confetti";
 
 const allNewDice = () =>
   Array(10)
@@ -14,6 +15,7 @@ const allNewDice = () =>
 
 export const App = () => {
   const [dice, setDice] = React.useState(allNewDice());
+  const [tenzies, setTenzies] = React.useState(false);
 
   const toggleDice = (dieId) => {
     setDice((oldDice) =>
@@ -36,19 +38,39 @@ export const App = () => {
       />
     ));
 
-  const rollNewDie = (die) => ({ ...die, value: Math.ceil(Math.random() * 6) });
+  // const rollNewDie = (die) => ({ ...die, value: Math.ceil(Math.random() * 6) });
 
   const rollDice = () => {
-    setDice((oldDice) =>
-      oldDice.map((oldDie) => {
-        return oldDie.isHeld ? oldDie : rollNewDie(oldDie);
-      })
-    );
+    if (!tenzies) {
+      setDice((oldDice) =>
+        oldDice.map((oldDie) => {
+          return oldDie.isHeld
+            ? oldDie
+            : { ...oldDie, value: Math.ceil(Math.random() * 6) };
+        })
+      );
+    } else {
+      setTenzies(false);
+      setDice(allNewDice());
+    }
   };
-  // if dice.isHeld is true, don't roll it
+
+  // keep two states in sync
+
+  React.useEffect(() => {
+    const allHeld = dice.every((die) => die.isHeld === true);
+    const allSameValue = dice.every((die) => die.value === dice[0].value);
+    if (allSameValue && allHeld) {
+      setTenzies(true);
+    }
+  }, [dice]);
+
+  // add scoreboard - the least number of rolls, timer - saved to localStorage, real dots on dice in css maybe?
+  // add window resize response to Confetti
 
   return (
     <main>
+      {tenzies && <Confetti />}
       <div className="content">
         <h1 className="title">Tenzies</h1>
         <p className="description">
@@ -56,9 +78,11 @@ export const App = () => {
           current value between rolls.
         </p>
         <div className="content--grid">{diceElements}</div>
-        <button onClick={rollDice} className="button--roll">
-          Roll
-        </button>
+        {
+          <button onClick={rollDice} className="button--roll">
+            {tenzies ? "New game" : "Roll"}
+          </button>
+        }
       </div>
     </main>
   );
