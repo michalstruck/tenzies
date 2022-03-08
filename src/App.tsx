@@ -16,8 +16,12 @@ const allNewDice = () =>
 export const App = () => {
   const [dice, setDice] = React.useState(allNewDice());
   const [tenzies, setTenzies] = React.useState(false);
+  const [scoreboard, setScoreboard] = React.useState({
+    rolls: 0,
+    time: 0,
+  });
 
-  const toggleDice = (dieId) => {
+  const toggleDice = (dieId: string) => {
     setDice((oldDice) =>
       oldDice.map((oldDie) => {
         return oldDie.id === dieId
@@ -64,6 +68,12 @@ export const App = () => {
       setTenzies(true);
     }
   }, [dice]);
+
+  // const scoreboardStorage = window.localStorage;
+
+  // React.useEffect(() => {
+  //   const time = setInterval(); wont work
+  // }, [dice, tenzies]);
 
   // add scoreboard - the least number of rolls, timer - saved to localStorage, real dots on dice in css maybe?
   // add window resize response to Confetti

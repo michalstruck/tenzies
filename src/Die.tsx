@@ -1,6 +1,12 @@
 import React from "react";
 
-export const Die = ({ value, isHeld, holdDice }) => {
+interface PropTypes {
+  value: number;
+  isHeld: boolean;
+  holdDice: () => void;
+}
+
+export const Die = ({ value, isHeld, holdDice }: PropTypes) => {
   return (
     <h2>
       <div
