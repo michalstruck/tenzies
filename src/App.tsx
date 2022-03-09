@@ -79,7 +79,7 @@ export const App = () => {
   return (
     //solve the problem of confetti on startup
     <>
-      <Scoreboard />
+      <Scoreboard gameState={gameState} />
       <main>
         {!gameState && <Confetti />}
         <div className="content">

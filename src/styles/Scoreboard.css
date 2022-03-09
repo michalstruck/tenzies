@@ -18,3 +18,6 @@
 .scoreboard-grid {
   grid-template-rows: 2rem 2 rem;
 }
+.scoreboard-time {
+  text-align: justify;
+}
