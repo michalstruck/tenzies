@@ -1,7 +1,9 @@
 import React from "react";
-import { Die } from "./Die";
+import "./styles/App.css";
+import { Die } from "./components/Die";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
+import { Scoreboard } from "./components/Scoreboard";
 
 const allNewDice = () =>
   Array(10)
@@ -15,11 +17,16 @@ const allNewDice = () =>
 
 export const App = () => {
   const [dice, setDice] = React.useState(allNewDice());
-  const [tenzies, setTenzies] = React.useState(false);
-  const [scoreboard, setScoreboard] = React.useState({
-    rolls: 0,
-    time: 0,
-  });
+  const [gameState, setGameState] = React.useState(false);
+
+  const allHeld = React.useCallback(
+    () => dice.every((die) => die.isHeld === true),
+    [dice]
+  );
+  const allSameValue = React.useCallback(
+    () => dice.every((die) => die.value === dice[0].value),
+    [dice]
+  );
 
   const toggleDice = (dieId: string) => {
     setDice((oldDice) =>
@@ -30,6 +37,11 @@ export const App = () => {
       })
     );
   };
+  // if gameState is true - keep the timer going, if dice.filter(return dice with isHeld set to true) returns an empty array
+  // don't keep track of rolls
+  // if gameState is false - stop the timer,
+
+  // dice.filter((die) => (die.value === 1) | 2 | 3 | 4 | 5 | 6);
 
   const diceElements =
     dice &&
@@ -42,10 +54,8 @@ export const App = () => {
       />
     ));
 
-  // const rollNewDie = (die) => ({ ...die, value: Math.ceil(Math.random() * 6) });
-
   const rollDice = () => {
-    if (!tenzies) {
+    if (gameState) {
       setDice((oldDice) =>
         oldDice.map((oldDie) => {
           return oldDie.isHeld
@@ -54,46 +64,50 @@ export const App = () => {
         })
       );
     } else {
-      setTenzies(false);
+      setGameState(true);
       setDice(allNewDice());
     }
   };
 
   // keep two states in sync
-
   React.useEffect(() => {
-    const allHeld = dice.every((die) => die.isHeld === true);
-    const allSameValue = dice.every((die) => die.value === dice[0].value);
-    if (allSameValue && allHeld) {
-      setTenzies(true);
+    if (allSameValue() && allHeld()) {
+      setGameState(false);
     }
-  }, [dice]);
-
-  // const scoreboardStorage = window.localStorage;
-
-  // React.useEffect(() => {
-  //   const time = setInterval(); wont work
-  // }, [dice, tenzies]);
-
-  // add scoreboard - the least number of rolls, timer - saved to localStorage, real dots on dice in css maybe?
-  // add window resize response to Confetti
+  }, [dice, allSameValue, allHeld]);
 
   return (
-    <main>
-      {tenzies && <Confetti />}
-      <div className="content">
-        <h1 className="title">Tenzies</h1>
-        <p className="description">
-          Roll until all dice are the same. Click each die to freeze it at its
-          current value between rolls.
-        </p>
-        <div className="content--grid">{diceElements}</div>
-        {
-          <button onClick={rollDice} className="button--roll">
-            {tenzies ? "New game" : "Roll"}
-          </button>
-        }
-      </div>
-    </main>
+    //solve the problem of confetti on startup
+    <>
+      <Scoreboard />
+      <main>
+        {!gameState && <Confetti />}
+        <div className="content">
+          <h1 className="title">Tenzies</h1>
+          <p className="description">
+            Roll until all dice are the same. Click each die to freeze it at its
+            current value between rolls.
+          </p>
+          <div className="content-grid">{diceElements}</div>
+          {gameState ? (
+            <button
+              name="rollButton"
+              onClick={rollDice}
+              className="button-roll"
+            >
+              Roll
+            </button>
+          ) : (
+            <button
+              name="newGameButton"
+              onClick={rollDice}
+              className="button-roll"
+            >
+              New game
+            </button>
+          )}
+        </div>
+      </main>
+    </>
   );
 };

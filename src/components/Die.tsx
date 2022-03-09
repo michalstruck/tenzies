@@ -11,9 +11,7 @@ export const Die = ({ value, isHeld, holdDice }: PropTypes) => {
     <h2>
       <div
         onClick={holdDice}
-        className={
-          isHeld ? "content--die die--held" : "content--die die--not--held"
-        }
+        className={isHeld ? "content-die die-held" : "content-die die-not-held"}
       >
         {value}
       </div>

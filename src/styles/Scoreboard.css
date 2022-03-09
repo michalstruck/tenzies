@@ -1,0 +1,20 @@
+* {
+  font-family: Karla;
+  line-height: 30px;
+  letter-spacing: -0.03em;
+}
+.scoreboard-main {
+  border: 2px solid hsl(278, 38%, 43%);
+  position: relative;
+  width: 12rem;
+  height: 12rem;
+  background: hsl(0, 3%, 93%);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.scoreboard-grid {
+  grid-template-rows: 2rem 2 rem;
+}
