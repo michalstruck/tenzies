@@ -1,8 +1,9 @@
-import React, { useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect } from "react";
 import "./styles/App.css";
 import { Die } from "./components/Die";
 import Confetti from "react-confetti";
 import { Scoreboard } from "./components/Scoreboard";
+import { useWindowSize } from "usehooks-ts";
 
 const allNewDice = () =>
   Array(10)
@@ -17,11 +18,13 @@ const allNewDice = () =>
 export const App = () => {
   const [dice, setDice] = useState(allNewDice());
   const [isGameFinished, setIsGameFinished] = useState(false);
+  const { height, width } = useWindowSize(); //write my own hook
 
   const allHeld = useCallback(
     () => dice.every((die) => die.isHeld === true),
     [dice]
   );
+
   const allSameValue = useCallback(
     () => dice.every((die) => die.value === dice[0].value),
     [dice]
@@ -78,7 +81,7 @@ export const App = () => {
     <>
       {/* <Scoreboard isGameFinished={isGameFinished} /> */}
       <main>
-        {isGameFinished && <Confetti />}
+        {isGameFinished && <Confetti width={width} height={height} />}
         <div className="content">
           <h1 className="title">Tenzies</h1>
           <p className="description">
