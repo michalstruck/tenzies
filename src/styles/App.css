@@ -11,6 +11,7 @@ body {
 }
 
 main {
+  margin-top: -12rem;
   width: 28rem;
   height: 28rem;
   background: hsl(278, 38%, 43%);

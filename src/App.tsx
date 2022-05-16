@@ -1,29 +1,28 @@
-import React from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import "./styles/App.css";
 import { Die } from "./components/Die";
-import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
 import { Scoreboard } from "./components/Scoreboard";
 
 const allNewDice = () =>
   Array(10)
     .fill({})
-    .map(() => ({
+    .map((die, i) => ({
       value: Math.ceil(Math.random() * 6),
       isHeld: false,
-      id: nanoid(),
+      id: `${i}`,
     }));
 // [...Array(10)].map(() => Math.ceil(Math.random() * 6));
 
 export const App = () => {
-  const [dice, setDice] = React.useState(allNewDice());
-  const [gameState, setGameState] = React.useState(false);
+  const [dice, setDice] = useState(allNewDice());
+  const [isGameFinished, setIsGameFinished] = useState(false);
 
-  const allHeld = React.useCallback(
+  const allHeld = useCallback(
     () => dice.every((die) => die.isHeld === true),
     [dice]
   );
-  const allSameValue = React.useCallback(
+  const allSameValue = useCallback(
     () => dice.every((die) => die.value === dice[0].value),
     [dice]
   );
@@ -37,9 +36,9 @@ export const App = () => {
       })
     );
   };
-  // if gameState is true - keep the timer going, if dice.filter(return dice with isHeld set to true) returns an empty array
+  // if isGameFinished is true - keep the timer going, if dice.filter(return dice with isHeld set to true) returns an empty array
   // don't keep track of rolls
-  // if gameState is false - stop the timer,
+  // if isGameFinished is false - stop the timer,
 
   // dice.filter((die) => (die.value === 1) | 2 | 3 | 4 | 5 | 6);
 
@@ -55,7 +54,7 @@ export const App = () => {
     ));
 
   const rollDice = () => {
-    if (gameState) {
+    if (!isGameFinished) {
       setDice((oldDice) =>
         oldDice.map((oldDie) => {
           return oldDie.isHeld
@@ -64,24 +63,22 @@ export const App = () => {
         })
       );
     } else {
-      setGameState(true);
+      setIsGameFinished(false);
       setDice(allNewDice());
     }
   };
 
-  // keep two states in sync
-  React.useEffect(() => {
+  useEffect(() => {
     if (allSameValue() && allHeld()) {
-      setGameState(false);
+      setIsGameFinished(true);
     }
   }, [dice, allSameValue, allHeld]);
 
   return (
-    //solve the problem of confetti on startup
     <>
-      <Scoreboard gameState={gameState} />
+      {/* <Scoreboard isGameFinished={isGameFinished} /> */}
       <main>
-        {!gameState && <Confetti />}
+        {isGameFinished && <Confetti />}
         <div className="content">
           <h1 className="title">Tenzies</h1>
           <p className="description">
@@ -89,23 +86,10 @@ export const App = () => {
             current value between rolls.
           </p>
           <div className="content-grid">{diceElements}</div>
-          {gameState ? (
-            <button
-              name="rollButton"
-              onClick={rollDice}
-              className="button-roll"
-            >
-              Roll
-            </button>
-          ) : (
-            <button
-              name="newGameButton"
-              onClick={rollDice}
-              className="button-roll"
-            >
-              New game
-            </button>
-          )}
+
+          <button onClick={rollDice} className="button-roll">
+            {isGameFinished ? "New game" : "Roll"}
+          </button>
         </div>
       </main>
     </>
