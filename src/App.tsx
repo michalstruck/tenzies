@@ -18,6 +18,8 @@ const allNewDice = () =>
 export const App = () => {
   const [dice, setDice] = useState(allNewDice());
   const [isGameFinished, setIsGameFinished] = useState(false);
+  const [rollNumber, setRollNumber] = useState(0);
+  const [firstRollOfGame, setFirstRoll] = useState(true);
   const { height, width } = useWindowSize(); //write my own hook
 
   const allHeld = useCallback(
@@ -32,18 +34,11 @@ export const App = () => {
 
   const toggleDice = (dieId: string) => {
     setDice((oldDice) =>
-      oldDice.map((oldDie) => {
-        return oldDie.id === dieId
-          ? { ...oldDie, isHeld: !oldDie.isHeld }
-          : oldDie;
-      })
+      oldDice.map((oldDie) =>
+        oldDie.id === dieId ? { ...oldDie, isHeld: !oldDie.isHeld } : oldDie
+      )
     );
   };
-  // if isGameFinished is true - keep the timer going, if dice.filter(return dice with isHeld set to true) returns an empty array
-  // don't keep track of rolls
-  // if isGameFinished is false - stop the timer,
-
-  // dice.filter((die) => (die.value === 1) | 2 | 3 | 4 | 5 | 6);
 
   const diceElements =
     dice &&
@@ -58,6 +53,8 @@ export const App = () => {
 
   const rollDice = () => {
     if (!isGameFinished) {
+      setRollNumber(rollNumber + 1);
+      setFirstRoll(false);
       setDice((oldDice) =>
         oldDice.map((oldDie) => {
           return oldDie.isHeld
@@ -68,6 +65,8 @@ export const App = () => {
     } else {
       setIsGameFinished(false);
       setDice(allNewDice());
+      setRollNumber(0);
+      setFirstRoll(true);
     }
   };
 
@@ -79,7 +78,11 @@ export const App = () => {
 
   return (
     <>
-      {/* <Scoreboard isGameFinished={isGameFinished} /> */}
+      <Scoreboard
+        isGameFinished={isGameFinished}
+        rollNumber={rollNumber}
+        firstRollOfGame={firstRollOfGame}
+      />
       <main>
         {isGameFinished && <Confetti width={width} height={height} />}
         <div className="content">
@@ -91,7 +94,7 @@ export const App = () => {
           <div className="content-grid">{diceElements}</div>
 
           <button onClick={rollDice} className="button-roll">
-            {isGameFinished ? "New game" : "Roll"}
+            {!firstRollOfGame || isGameFinished ? "Roll" : "New game"}
           </button>
         </div>
       </main>
