@@ -1,23 +1,31 @@
 * {
   font-family: Karla;
-  line-height: 30px;
-  letter-spacing: -0.03em;
+  line-height: 1rem;
 }
-.scoreboard-main {
-  border: 2px solid hsl(278, 38%, 43%);
+.scoreboard-container {
+  background: hsl(278, 38%, 43%);
   position: relative;
   width: 12rem;
   height: 12rem;
-  background: hsl(0, 3%, 93%);
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 2rem;
+  float: left;
 }
-.scoreboard-grid {
-  grid-template-rows: 2rem 2 rem;
+.scoreboard-main {
+  width: 10.5rem;
+  height: 10.5rem;
+  background: hsl(0, 3%, 93%);
+  border-radius: 1rem;
 }
-.scoreboard-time {
-  text-align: justify;
+.scoreboard-title {
+  display: flex;
+  justify-content: center;
+}
+.scoreboard-stats {
+  margin-left: 0.2rem;
+  font-size: 0.75rem;
 }
