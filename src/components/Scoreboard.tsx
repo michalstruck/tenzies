@@ -40,15 +40,16 @@ export const Scoreboard = ({
 
   useEffect(() => {
     if (
-      localStorage.getItem("rollATB")! < `${rollNumber}` &&
+      localStorage.getItem("rollATB")! > `${rollNumber}` &&
       rollNumber !== 0
     ) {
       localStorage.setItem("rollATB", `${rollNumber}`);
     }
 
-    if (localStorage.getItem("timeATB")! < `${time}` && time !== 0) {
+    if (localStorage.getItem("timeATB")! > `${time}` && time !== 0) {
       localStorage.setItem("timeATB", `${time}`);
     }
+    console.log("triggered localStorage change");
   }, [isGameFinished]);
 
   return (
