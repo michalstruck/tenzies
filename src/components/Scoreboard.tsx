@@ -7,53 +7,65 @@ interface propTypes {
   firstRollOfGame: boolean;
 }
 
+let interval: NodeJS.Timer;
+
+if (
+  (localStorage.getItem("rollATB") || localStorage.getItem("timeATB")) &&
+  localStorage.getItem("timeATB") === "0" &&
+  localStorage.getItem("rollATB") === "0"
+) {
+  localStorage.setItem("rollATB", "");
+  localStorage.setItem("timeATB", "");
+}
+
 export const Scoreboard = ({
   isGameFinished,
   rollNumber,
   firstRollOfGame,
 }: propTypes) => {
-  const [timer, setTimer] = useState({
-    minutes: 0,
-    seconds: 0,
-    milliseconds: 0,
-  });
   const [time, setTime] = useState(0);
-  const [timerOn, setTimerOn] = useState(false);
 
   useEffect(() => {
-    let interval: NodeJS.Timer;
-
     if (isGameFinished) {
       clearInterval(interval!);
+      setTime(0);
     } else if (rollNumber) {
       interval = setInterval(() => {
-        setTime((prevTime) => prevTime + 10);
-      }, 10);
+        setTime((prevTime) => prevTime + 1);
+      }, 1000);
     }
+
     return () => clearInterval(interval);
   }, [firstRollOfGame, isGameFinished]);
 
-  console.log(isGameFinished);
+  useEffect(() => {
+    if (
+      localStorage.getItem("rollATB")! < `${rollNumber}` &&
+      rollNumber !== 0
+    ) {
+      localStorage.setItem("rollATB", `${rollNumber}`);
+    }
+
+    if (localStorage.getItem("timeATB")! < `${time}` && time !== 0) {
+      localStorage.setItem("timeATB", `${time}`);
+    }
+  }, [isGameFinished]);
 
   return (
     <div className="scoreboard-container">
       <div className="scoreboard-main">
         <h3 className="scoreboard-title">SCOREBOARD</h3>
         <div className="scoreboard-stats">
-          {/* Time: {timer.minutes.toString().padStart(2, "0")}:
-          {timer.seconds.toString().padStart(2, "0")}:
-          {timer.milliseconds.toString().padStart(3, "0")}
-          <br /> */}
-          Time:{" "}
-          {
-            // (time / 6000).toString().padStart(2, "0") +
-            Math.round(time / 1000)
-              .toString()
-              .padStart(2, "0")
-          }
+          Time: {time.toString().padStart(2, "0")}
           s
           <br />
           Number of rolls: {rollNumber}
+          <br />
+          All time best:{" "}
+          {localStorage.getItem("timeATB")!.padStart(2, "0") +
+            "s@" +
+            localStorage.getItem("rollATB")!.padStart(2, "0") +
+            "rolls"}
         </div>
       </div>
     </div>

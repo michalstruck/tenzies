@@ -75,7 +75,6 @@ export const App = () => {
       setIsGameFinished(true);
     }
   }, [dice, allSameValue, allHeld]);
-
   return (
     <>
       <Scoreboard

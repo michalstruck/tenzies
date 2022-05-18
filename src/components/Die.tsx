@@ -55,7 +55,7 @@ export const Die = ({ value, isHeld, holdDice }: PropTypes) => {
           {dot}
         </div>
       ));
-    } else if (value === 6) {
+    } else {
       temp[0] = "·";
       temp[2] = "·";
       temp[3] = "·";
