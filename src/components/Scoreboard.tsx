@@ -7,8 +7,6 @@ interface propTypes {
   firstRollOfGame: boolean;
 }
 
-// localStorage.clear();
-// sessionStorage.clear();
 let interval: NodeJS.Timer;
 
 if (!localStorage.getItem("rollATB") || !localStorage.getItem("timeATB")) {
@@ -21,9 +19,6 @@ if (!sessionStorage.getItem("rollSB") || !sessionStorage.getItem("timeSB")) {
   sessionStorage.setItem("timeSB", "");
 }
 
-console.log(sessionStorage, localStorage, +"");
-
-//fix localStorage and make sesh store
 export const Scoreboard = ({
   isGameFinished,
   rollNumber,

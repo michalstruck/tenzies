@@ -79,11 +79,7 @@ export const Die = ({ value, isHeld, holdDice }: PropTypes) => {
   return (
     <div
       onClick={holdDice}
-      className={
-        isHeld
-          ? "content-die die-held die-face"
-          : "content-die die-not-held die-face"
-      }
+      className={isHeld ? "content-die die-held" : "content-die die-not-held"}
     >
       {renderedDots()}
     </div>
