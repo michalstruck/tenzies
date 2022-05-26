@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+[![GNU GPLv3][license-shield]][license-url]
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- TABLE OF CONTENTS -->
 
-## Available Scripts
+<details>
 
-In the project directory, you can run:
+<summary>Table of Contents</summary>
 
-### `npm start`
+<ol>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<li>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<a  href="#about-the-project">About The Project</a>
 
-### `npm test`
+<ul>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<li><a  href="#built-with">Built With</a></li>
 
-### `npm run build`
+</ul>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+</li>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+</li>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<li><a  href="#license">License</a></li>
 
-### `npm run eject`
+<li><a  href="#contact">Contact</a></li>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+</ol>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+</details>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<!-- ABOUT THE PROJECT -->
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## About The Project
 
-## Learn More
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Tenzies is a second project I started during a React course on Scrimba. It's a simple game, creation of which gave me strong fundamentals to build on later. Of course, I rebuilt it a little bit, changed, styling added a Scoreboard - measuring time it took to finish the game, number of rolls...see for yourself!
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<p  align="right">(<a  href="#top">back to top</a>)</p>
 
-### Code Splitting
+### Built With
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Nothing spectacular, just plain Typescript React.
 
-### Analyzing the Bundle Size
+- [React.js](https://reactjs.org/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+in [TypeScript](https://www.typescriptlang.org/)
 
-### Making a Progressive Web App
+<p  align="right">(<a  href="#top">back to top</a>)</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<!-- CONTRIBUTING -->
 
-### Advanced Configuration
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-### Deployment
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Don't forget to give the project a star! Thanks again!
 
-### `npm run build` fails to minify
+1. Fork the Project
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+
+5. Open a Pull Request
+
+<p  align="right">(<a  href="#top">back to top</a>)</p>
+
+<!-- LICENSE -->
+
+## License
+
+Distributed under the GNU GPLv3 License. See `license` for more information.
+
+<p  align="right">(<a  href="#top">back to top</a>)</p>
+
+<!-- CONTACT -->
+
+## Contact
+
+Project Link: [https://github.com/michalstruck/tenzies](https://github.com/michalstruck/tenzies)
+
+<p  align="right">(<a  href="#top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[license-shield]: https://img.shields.io/github/license/michalstruck/tenzies.svg?style=for-the-badge
+[license-url]: https://github.com/michalstruck/tenzies/blob/main/license
+[product-screenshot]: ./screenshot.png
