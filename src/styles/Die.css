@@ -4,6 +4,7 @@
   font-size: 3rem;
   display: block;
   line-height: 0.5rem;
+  pointer-events: none;
 }
 
 .content-die {
