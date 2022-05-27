@@ -3,24 +3,21 @@ import "./styles/App.css";
 import { Die } from "./components/Die";
 import Confetti from "react-confetti";
 import { Scoreboard } from "./components/Scoreboard";
-import { useWindowSize } from "usehooks-ts";
+import useWindowSize from "./common/useWindowSize";
 
 const allNewDice = () =>
-  Array(10)
-    .fill({})
-    .map((die, i) => ({
-      value: Math.ceil(Math.random() * 6),
-      isHeld: false,
-      id: `${i}`,
-    }));
-// [...Array(10)].map(() => Math.ceil(Math.random() * 6));
+  [...Array(10)].map((die, i) => ({
+    value: Math.ceil(Math.random() * 6),
+    isHeld: false,
+    id: `${i}`,
+  }));
 
-export const App = () => {
+const App = () => {
   const [dice, setDice] = useState(allNewDice());
   const [isGameFinished, setIsGameFinished] = useState(false);
   const [rollNumber, setRollNumber] = useState(0);
   const [firstRollOfGame, setFirstRoll] = useState(true);
-  const { height, width } = useWindowSize(); //write my own hook
+  const { height, width } = useWindowSize();
 
   const allHeld = useCallback(
     () => dice.every((die) => die.isHeld === true),
@@ -100,3 +97,5 @@ export const App = () => {
     </>
   );
 };
+
+export default App;
