@@ -7,12 +7,27 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-repeat: repeat;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  z-index: -1;
+
+  filter: saturate(800%) contrast(1.1) grayscale(40%);
+  background-image: url("../common/background.webp");
 }
 
 main {
   width: 28rem;
   height: 28rem;
-  background: hsl(278, 38%, 43%);
+  background: hsl(264, 47%, 55%);
   display: flex;
   justify-content: center;
   align-items: center;
