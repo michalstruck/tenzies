@@ -36,7 +36,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Tenzies is a second project I started during a React course on Scrimba. It's a simple game, creation of which gave me strong fundamentals to build on later. Of course, I rebuilt it a little bit, changed, styling added a Scoreboard - measuring time it took to finish the game, number of rolls...see for yourself!
+Tenzies is a second project I started during a React course on Scrimba. It's a simple game, creation of which gave me strong fundamentals to build on later. Of course, I rebuilt it, changed styling, added a Scoreboard - measuring time it took to finish the game, number of rolls...see for yourself!
 
 <p  align="right">(<a  href="#top">back to top</a>)</p>
 
