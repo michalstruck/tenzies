@@ -6,6 +6,8 @@ interface PropTypes {
   holdDice: () => void;
 }
 
+//dice listd from 1 to 6 with proper location on die face
+
 const DICE = [
   ["", "", "", "", "·", "", "", "", ""],
   ["·", "", "", "", "", "", "", "", "·"],
